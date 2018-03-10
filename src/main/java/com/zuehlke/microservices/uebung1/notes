@@ -1,0 +1,82 @@
+Deployment:
+    GitHub <-- Heroku
+  Alternativ:
+    Github <-- Jenkins/CI --> Heroku
+
+Springboot erzeugt ein allumfassendes JAR, das auch Tomcat usw. einschliesst.
+Dies macht das Deployment auf Heroku, resp. Docker Container einfacher als
+z.B. WAR Files.
+
+Spring verwendet standardmässig Jackson, um Objekte zu JSON zu parsen.
+Jackson verwendet dafür die Klasse ObjectMapper. Jackson ermöglicht,
+Klassen aus Json zu erzeugen mit @JsonCreator, @JsonProperty.
+
+Swagger erzeugt API Dokumentationen aus Spring Applikationen. Auf dem Swagger ui
+kann man Controller Testen (Rest Calls absetzen etc.)
+
+Unit Tests
+    machen idr kein Netzwerk i/o
+    Testen Methoden/Klassen und Interaktion zw Klassen
+Integrationstests
+Component Test
+    Container (Spring App) wird hocgefahren, aber Externe Systeme und DB werden gemockt
+Contract Test
+    Schnittstelle = Vertrag. Testen, dass die Schnittstelle die benötigten Felder liefert
+    Testet Vertrag zu anderen Services oder zu sich selbst.
+E2E Tests
+    Ganzes System inkl. Zusammenspiel mit anderen Services.
+    e2e Tests sind fragil und Fehler oft schwer zu finden.
+Exploratory
+    Tester sucht manuell nach Schwachstellen. Verfolgt dabei nicht den typischen
+
+Uebung 3: Component Test mit Rest ASSURED
+
+@SpringBootTest startet App auf zufälligem freiem Port. Läuft mit dem normalen JUnit Runner (SpringRunner.class)
+Rest Assured
+when().<Request>.then().<Response>
+Json responses werden mit hamcrest assertions geprüft.
+    "id", contains(1, 2, 3) Liste der ids aller gelieferten Objekte
+    "[0].id", equalTo(1)    Erstes Objekte der gelieferten Objekte
+
+Service A soll mit Service B komminizieren...
+  Integration Technologies
+    - Soap
+    - Rest
+    - RPC
+    - Message Queue (MQ) / Messaging
+    - TCP / Socket
+    - Files
+    - DB
+  Ckaracteristics einer guten Integration
+    - Transaktionen
+    - Standardisierung
+    - Technologie unabhängig (java, .net, usw.)
+    - Einfachheit für Service Consumers
+    - Logbar / Monitoring
+    - Performance
+    - avoid breaking changes (-> Versionierung)
+    -  interne Implementierungsdetails verstecken
+
+Vor Microservices: SOA wo Services über ESB orchestriert werden. Gefahr: ESB wird immer grösser.
+Bei Microservices ist die Logik des ESB in den Services selbst.
+
+Konfiguration
+  Spring ermöglicht verschiedene Möglichkeiten um Properties (wie server port, service urls etc zu setzen)
+  In Java Klassen kann mit @Value(${<property.name>}) auf Properties zugegriffen werden.
+
+Histrix: netflix libary.
+
+Spring Actuator: health checks. /health.
+
+
+
+
+
+
+
+
+
+
+
+
+
